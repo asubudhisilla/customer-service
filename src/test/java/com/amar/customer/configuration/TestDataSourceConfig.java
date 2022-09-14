@@ -5,26 +5,17 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 
 @Configuration
-public class DataSourceConfig {
+public class TestDataSourceConfig {
 
     @Bean
-    public HikariDataSource dataSource(HikariConfig hikariConfig){
-        return new HikariDataSource(hikariConfig);
-    }
-
-    @Bean
-    public JdbcTemplate jdbcTemplate(DataSource dataSource){
-        return new JdbcTemplate(dataSource);
-    }
-
-    @Bean
-    @Profile("!test")
+    @Profile("test")
     public HikariConfig dsConfig(@Value("${app.datasource.db-name}") String jdbcUrl,
                                  @Value("${app.datasource.driverClassName}") String driverClassName,
                                  @Value("${app.datasource.username}") String userName,
