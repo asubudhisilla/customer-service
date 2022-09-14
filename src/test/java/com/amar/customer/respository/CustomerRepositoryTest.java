@@ -9,9 +9,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -24,9 +22,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Import({DataSourceConfig.class, TestDataSourceConfig.class})
 @ActiveProfiles("test")
 public class CustomerRepositoryTest {
-    @Autowired
-    private TestEntityManager entityManager;
-
     @Autowired
     ICustomerRepository repository;
 
@@ -45,13 +40,13 @@ public class CustomerRepositoryTest {
         Customer customer = repository.save(Customer.builder()
                 .firstName("Amar")
                 .lastName("Silla")
-                .dob(LocalDate.of(1990,06,04))
+                .dob(LocalDate.of(1990, 6, 4))
                 .address("T3A304, Pune")
                 .build());
 
         assertThat(customer).hasFieldOrPropertyWithValue("firstName", "Amar");
         assertThat(customer).hasFieldOrPropertyWithValue("lastName", "Silla");
-        assertThat(customer).hasFieldOrPropertyWithValue("dob", LocalDate.of(1990,06,04));
+        assertThat(customer).hasFieldOrPropertyWithValue("dob", LocalDate.of(1990, 6, 4));
         assertThat(customer).hasFieldOrPropertyWithValue("address", "T3A304, Pune");
     }
 }
