@@ -1,19 +1,15 @@
 package com.amar.customer.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
 @Entity
 @Table(name = "customer_details")
@@ -22,23 +18,23 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id", insertable = false, updatable = false, nullable = false)
-    private UUID id;
+    UUID id;
 
     @Column(name = "first_name")
-    private String firstName;
+    String firstName;
 
     @Column(name = "last_name")
-    private String lastName;
+    String lastName;
 
     @Column(name = "date_of_birth")
-    private LocalDate dob;
+    LocalDate dob;
 
     @Column(name = "address")
-    private String address;
+    String address;
 
     @CreationTimestamp
-    private LocalDate createdAt;
+    LocalDate createdAt;
 
-    @CreationTimestamp
-    private LocalDate updatedAt;
+    @UpdateTimestamp
+    LocalDate updatedAt;
 }

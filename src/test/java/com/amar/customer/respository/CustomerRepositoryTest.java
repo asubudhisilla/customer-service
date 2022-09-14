@@ -82,7 +82,7 @@ public class CustomerRepositoryTest {
                 .dob(LocalDate.of(1990, 6, 4))
                 .address("T3A304, Pune")
                 .build());
-        List<Customer> customers = repository.searchByFirstAndOrLastName(Optional.of("Amar"),Optional.empty());
+        List<Customer> customers = repository.searchByFirstAndOrLastName(Optional.of("Amar"), Optional.empty());
         assertThat(customers.size()).isGreaterThan(0);
     }
 
@@ -94,7 +94,7 @@ public class CustomerRepositoryTest {
                 .dob(LocalDate.of(1990, 6, 4))
                 .address("T3A304, Pune")
                 .build());
-        List<Customer> customers = repository.searchByFirstAndOrLastName(Optional.empty(),Optional.of("Silla"));
+        List<Customer> customers = repository.searchByFirstAndOrLastName(Optional.empty(), Optional.of("Silla"));
         assertThat(customers.size()).isGreaterThan(0);
     }
 
@@ -106,7 +106,7 @@ public class CustomerRepositoryTest {
                 .dob(LocalDate.of(1990, 6, 4))
                 .address("T3A304, Pune")
                 .build());
-        List<Customer> customers = repository.searchByFirstAndOrLastName(Optional.of("Amar"),Optional.of("Silla"));
+        List<Customer> customers = repository.searchByFirstAndOrLastName(Optional.of("Amar"), Optional.of("Silla"));
         assertThat(customers.size()).isGreaterThan(0);
     }
 
@@ -124,7 +124,7 @@ public class CustomerRepositoryTest {
                 .dob(LocalDate.of(1995, 11, 23))
                 .address("T3A304, Pune")
                 .build());
-        List<Customer> customers = repository.searchByFirstAndOrLastName(Optional.empty(),Optional.empty());
+        List<Customer> customers = repository.searchByFirstAndOrLastName(Optional.empty(), Optional.empty());
         assertThat(customers.size()).isEqualTo(2);
     }
 }
