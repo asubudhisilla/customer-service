@@ -63,15 +63,15 @@ public class CustomerRepositoryTest {
 
     @Test
     public void should_find_customer_by_id() {
-        entityManager.persist(Customer.builder()
+        Customer c = entityManager.persist(Customer.builder()
                 .firstName("Amar")
                 .lastName("Silla")
                 .dob(LocalDate.of(1990, 6, 4))
                 .address("T3A304, Pune")
                 .build());
-        Optional<Customer> customer = repository.findById(1L);
+        Optional<Customer> customer = repository.findById(c.getId());
         assertTrue(customer.isPresent());
-        assertThat(customer.get().getId()).isEqualTo(1L);
+        assertThat(customer.get().getId()).isEqualTo(c.getId());
     }
 
     @Test
@@ -119,7 +119,7 @@ public class CustomerRepositoryTest {
                 .address("T3A304, Pune")
                 .build());
         entityManager.persist(Customer.builder()
-                .firstName("Rohit")
+                .firstName("Ronit")
                 .lastName("Silla")
                 .dob(LocalDate.of(1995, 11, 23))
                 .address("T3A304, Pune")
