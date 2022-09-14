@@ -7,12 +7,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ICustomerRepository extends JpaRepository<Customer, Long> {
 
     @Query(value = "select * from customer_details  where (:firstName is null or first_name = :firstName)"
             +" and (:lastName is null or last_name = :lastName)", nativeQuery = true)
-    List<Customer> searchByFirstAndOrLastName(@Param("firstName") String firstName,
-                                              @Param("lastName") String lastName);
+    List<Customer> searchByFirstAndOrLastName(@Param("firstName") Optional<String> firstName,
+                                              @Param("lastName") Optional<String> lastName);
 }
