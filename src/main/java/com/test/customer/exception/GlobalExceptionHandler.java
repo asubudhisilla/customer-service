@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class GlobalExceptionHandler {
 
     //specific exception
-    @ExceptionHandler({CustomerNotFoundException.class, CustomerExistException.class})
+    @ExceptionHandler(CustomerNotFoundException.class)
     public ResponseEntity<ErrorDetails> handleResourceNotFoundException(CustomerNotFoundException exception,
                                                                         WebRequest webRequest) {
         ErrorDetails errorDetails = ErrorDetails.builder()
@@ -21,6 +21,16 @@ public class GlobalExceptionHandler {
                 .errorMessage(exception.getMessage())
                 .timestamp(LocalDateTime.now()).build();
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(CustomerExistException.class)
+    public ResponseEntity<ErrorDetails> handleResourceFoundException(CustomerExistException exception,
+                                                                        WebRequest webRequest) {
+        ErrorDetails errorDetails = ErrorDetails.builder()
+                .details(webRequest.getDescription(false))
+                .errorMessage(exception.getMessage())
+                .timestamp(LocalDateTime.now()).build();
+        return new ResponseEntity<>(errorDetails, HttpStatus.FOUND);
     }
 
     // global exceptions

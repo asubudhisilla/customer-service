@@ -22,7 +22,7 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public Customer createCustomer(Customer customer) {
-        Optional<Customer> existingCustomer = customerRepository.searchByFirstAndLastName(customer.getFirstName(),customer.getFirstName());
+        Optional<Customer> existingCustomer = customerRepository.searchByFirstAndLastName(customer.getFirstName(),customer.getLastName());
         if(existingCustomer.isPresent()) {
             throw new CustomerExistException(String.format("Customer already exists with given firstName=%s and lastName=%s", customer.getFirstName(), customer.getLastName()));
         }
