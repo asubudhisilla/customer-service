@@ -3,7 +3,6 @@ package com.test.customer.payload;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Data;
-import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 
@@ -14,4 +13,9 @@ public class ErrorDetails {
     private LocalDateTime timestamp;
     private String errorMessage;
     private String details;
+    private String errorCode;
+    private String request;
+    private String requestType;
+    private String customMessage;
+
 }

@@ -11,5 +11,5 @@ public interface ICustomerService {
     List<Customer> getAllCustomer();
     Customer updateCustomerAddress(UUID uuid, String address);
     Customer getCustomerById(UUID uuid);
-    List<Customer> searchByFirstAndOrLastName(Optional<String> firstName, Optional<String> lastName);
+    List<Customer> searchByFirstAndOrLastName(String firstName, String lastName);
 }

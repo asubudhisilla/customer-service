@@ -1,9 +1,9 @@
 package com.test.customer.model;
 
 import lombok.*;
-import lombok.experimental.Accessors;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -16,13 +16,14 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @Entity
-@Table(name = "customer_details", uniqueConstraints = {@UniqueConstraint(columnNames = {"first_name", "last_name"})})
+@Table(name = "customer_details")
 @NoArgsConstructor
-public class Customer {
+public class Customer{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id", insertable = false, updatable = false, nullable = false)
+    @Type(type = "org.hibernate.type.UUIDCharType")
     UUID id;
 
     @Column(name = "first_name")

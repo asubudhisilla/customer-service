@@ -10,20 +10,21 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
 @Service
 public class CustomerServiceImpl implements ICustomerService {
 
     private final ICustomerRepository customerRepository;
 
-    public CustomerServiceImpl(ICustomerRepository customerRepository){
+    public CustomerServiceImpl(ICustomerRepository customerRepository) {
         super();
         this.customerRepository = customerRepository;
     }
 
     @Override
     public Customer createCustomer(Customer customer) {
-        Optional<Customer> existingCustomer = customerRepository.searchByFirstAndLastName(customer.getFirstName(),customer.getLastName());
-        if(existingCustomer.isPresent()) {
+        Optional<Customer> existingCustomer = customerRepository.searchByFirstAndLastName(customer.getFirstName(), customer.getLastName());
+        if (existingCustomer.isPresent()) {
             throw new CustomerExistException(String.format("Customer already exists with given firstName=%s and lastName=%s", customer.getFirstName(), customer.getLastName()));
         }
         return customerRepository.save(customer);
@@ -36,18 +37,22 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public Customer updateCustomerAddress(UUID uuid, String address) {
-        Customer customer = customerRepository.findById(uuid).orElseThrow(()-> new CustomerNotFoundException(String.format("Customer not found for id=%s",uuid)));
+        Customer customer = customerRepository.findById(uuid).orElseThrow(() -> new CustomerNotFoundException(String.format("Customer not found for id=%s", uuid)));
         customer.setAddress(address);
         return customerRepository.save(customer);
     }
 
     @Override
     public Customer getCustomerById(UUID uuid) {
-        return customerRepository.findById(uuid).orElseThrow(()-> new CustomerNotFoundException(String.format("Customer not found for id=%s",uuid)));
+        return customerRepository.findById(uuid).orElseThrow(() -> new CustomerNotFoundException(String.format("Customer not found for id=%s", uuid)));
     }
 
     @Override
-    public List<Customer> searchByFirstAndOrLastName(Optional<String> firstName, Optional<String> lastName) {
-        return customerRepository.searchByFirstAndOrLastName(firstName, lastName);
+    public List<Customer> searchByFirstAndOrLastName(String firstName, String lastName) {
+        List<Customer> customers = customerRepository.searchByFirstAndOrLastName(firstName, lastName);
+        if (customers.size() == 0) {
+            throw new CustomerNotFoundException(String.format("Customers not found for firstName=%s and/or lastName=%s", firstName, lastName));
+        }
+        return customers;
     }
 }
