@@ -1,14 +1,11 @@
 package com.assignment.customer.respository;
 
-import com.assignment.customer.configuration.DataSourceConfig;
 import com.assignment.customer.model.Customer;
-import com.assignment.customer.configuration.TestDataSourceConfig;
 import com.assignment.customer.repository.ICustomerRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
@@ -19,7 +16,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
-@Import({DataSourceConfig.class, TestDataSourceConfig.class})
 @ActiveProfiles("test")
 public class CustomerRepositoryTest {
     @Autowired

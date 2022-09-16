@@ -2,7 +2,6 @@ package com.assignment.customer.controller;
 
 
 import com.assignment.customer.configuration.CustomerConfiguration;
-import com.assignment.customer.configuration.TestDataSourceConfig;
 import com.assignment.customer.model.Customer;
 import com.assignment.customer.service.impl.CustomerServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
-@Import({CustomerConfiguration.class, TestDataSourceConfig.class})
+@Import({CustomerConfiguration.class})
 @ActiveProfiles("test")
 public class CustomerControllerTest {
     @Autowired
