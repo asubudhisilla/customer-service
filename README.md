@@ -6,6 +6,7 @@ There are several ways to run a Spring Boot application on your local machine. O
 
 
 # Checkout project locally ->
+Branch -> master
 git clone https://github.com/asubudhisilla/customer-service.git
 
 mvn clean install
